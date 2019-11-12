@@ -1,0 +1,22 @@
+
+Its nice to see where we can see in the codebase this code smells.
+Too many layers? Too many indirections? Is a problem.
+Getting a data in some thing and out of a thing, maybe its time to simplify. Its not useful.
+
+----
+
+If we have Money object, lets use it.
+Should we write an http client? not a good idea. We are gonna have the same problems that the http-client creators had.
+But bear in mind that our domain is not likely the same. For ex: Money VO. how many decimals? our business maybe is not the same as the library owner.
+- First solve the problem for your specific case, and then think about bringing a VO library.
+
+----
+
+1. Evolutionary design means start an idea and then evolve from there. With different types of objects and etc etc
+2. Building blocks first means start a visualization of the big picture first and implement.
+
+If you start building blocks first, maybe you start creating some VO, and then the changeability of the project is compromised.
+Instead of grasping all in one go, maybe its a good idea to start small and evolve from there.
+
+----
+

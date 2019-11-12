@@ -1,4 +1,4 @@
-changing setters to actions.
+We should change setters to actions.
 
 Should we have state as a value object? yes?
 

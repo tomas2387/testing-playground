@@ -1,6 +1,9 @@
-The value object describes the entity. But beside that they are identifiable: any instance of a VO can be use in any way,
-and nobody cares about the instance of that VO. Entities we care about that instance. An invoice should be
-different from another entity.
+The value object describes the entity.
+Any instance of a VO can be used in any way.
+Nobody cares about the instance of that VO.
+An entity is identifiable and we care about that specific instance and every time it changes.
+An invoice should be different from another invoice entity.
+
 - Change and lifecycle: sometimes it changes completely. An invoice when its confirmed and finalized, nothing can be changed
 or called. Maybe we should throw an exception when it gets called.
 - Invariant protection: We want to guarantee consistency. We dont want unexpected surprises. Invariant is something that is

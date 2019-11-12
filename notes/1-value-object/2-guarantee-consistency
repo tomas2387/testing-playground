@@ -1,0 +1,3 @@
+With a value object we can assure checks to a string email.
+With this strategy we don't have scattered around checks if the email is correct or not.
+We just use the value object email and guarantee consistency.

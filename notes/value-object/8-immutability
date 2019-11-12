@@ -1,7 +1,0 @@
-You cant change the state of a value object.
-
-We must value more the transformations and less the mutations.
-
-Modifiers they dont change the state of the object, they return a new object.
-Objects, cant never be change, we can pass around and be safe that its state has not been affected.
-
