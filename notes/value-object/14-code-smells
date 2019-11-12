@@ -1,0 +1,16 @@
+Shotgun surgery
+- You do the same everywhere. Rounding everywhere. And when change is needed you have to change in scattered places.
+
+Duplicate code
+
+Data clumps
+
+Primitive obsession
+
+Lazy class
+- A value object that does nothing.
+
+Speculative generality
+- You get it when people say, "Oh, I think we need the ability to do this kind of thing someday"
+and thus want all sorts of hooks and special cases to handle things that aren't required.
+The result often is harder to understand and maintain. We want generality when we really need it.

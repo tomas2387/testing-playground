@@ -1,0 +1,3 @@
+With an object we can assure checks to an string email.
+With this strategy we don't have scattered around checks if the email
+is correct or not.

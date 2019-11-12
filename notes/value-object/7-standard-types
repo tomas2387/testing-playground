@@ -1,0 +1,5 @@
+We can force clients to do the right thing.
+With value objects we can guarantee the client only calls what we want.
+
+So we can make the constructor private, and expose factory methods, limiting the input options.
+That way we reduce the possibility the client mistakes and calls a method with an invalid argument.

@@ -1,0 +1,3 @@
+Not everything has to be an object.
+There is an anti pattern that is called "Lazy class".
+Is a class that does nothing. Why it is a class then?

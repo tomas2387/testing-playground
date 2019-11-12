@@ -1,0 +1,4 @@
+A tariff can only be multiplied with a quantity object. And it returns an object Money.
+
+This is where the domain can be modeled in your code.
+The power of value objects can be modeled in your code.

@@ -1,0 +1,12 @@
+If the object changes it needs to be identifiable.
+Since the entity is something that tracks changes on time, we should
+create it with the identification. Provide it as a constructor argument (UUID).
+Different ways of doing: integer, uuid, wrapped in VO. Even we can call the db for a sequence.
+Redis has a nice implementation for the next incremented number: INCR
+Regardless of which type you use, you should use a VO, so that you dont care about the
+implementation behind it, you just need an id.
+
+The repository provides the next identity.
+
+
+

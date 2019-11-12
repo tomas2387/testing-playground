@@ -8,44 +8,28 @@ use DateTimeImmutable;
 
 final class SalesInvoice
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $customerId;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $currency;
 
-    /**
-     * @var float|null
-     */
+    /** @var float|null */
     private $exchangeRate;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $quantityPrecision;
 
-    /**
-     * @var Line[]
-     */
+    /** @var Line[] */
     private $lines = [];
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $isFinalized = false;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $isCancelled = false;
 
-    /**
-     * @var DateTimeImmutable
-     */
+    /** @var DateTimeImmutable */
     private $invoiceDate;
 
     public function __construct()
@@ -84,7 +68,8 @@ final class SalesInvoice
         float $tariff,
         ?float $discount,
         string $vatCode
-    ): void {
+    ): void
+    {
         Assertion::inArray($vatCode, ['S', 'L']);
 
         $this->lines[] = new Line(

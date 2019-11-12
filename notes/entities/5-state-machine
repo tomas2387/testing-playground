@@ -1,0 +1,5 @@
+for each of the states, there is a list of things to be possible to do or forbidden to do.
+
+Every transition we have to check if the transition is possible.
+This again, is the idea that we make the entity foolproof.
+You can not do "weird" stuff with the entity.

@@ -1,0 +1,14 @@
+Making the test aware of the implementation details or the state is "bad".
+Dont make "common knowledge" the lines of the SalesInvoice for example.
+The tests should justify the production code and every production code should be justified.
+
+Dont expose all the state. Change setters to actions.
+
+# Tests for invariants and edge cases.
+Expect argument exceptions.
+Expect keywords from exceptions.
+
+# State transitions
+Expect logic exception.
+The red book is more complete about domain events. Although sometimes there doesnt implement
+the events inside the entity, it goes around.

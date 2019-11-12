@@ -1,0 +1,7 @@
+To make it work doctrine instantiates the object with primitives and the
+getters could create value objects and return them. that way we preserve the contract and the
+clients dont know that we work with primitives internally and not VO.
+
+---
+
+the alternative its to use doctrine-embeddable

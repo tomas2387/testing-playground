@@ -1,0 +1,45 @@
+1. Vat code. Has to check for input S or L
+2. Lines should be a value object.
+- It has a lot of behaviour to calculate the net amount.
+- It has to calculate net amount in ledger currency
+- It has to calculate vat amount.
+3. Currency value object.
+4. Exchange rate. For correct usage.
+5. There should be a new property called state which can be open, cancelled or finalized.
+- to avoid inconsistency.
+6. quantity and quantity precision for correct usage inside line.
+7. product has id and description, for correct usage inside line.
+8. quantity for correct usage inside line.
+9. tariff for correct usage inside line.
+10. discount for correct usage inside line. data-clumping because we dont know if its percentage or dollars or what.
+
+
+Correct Answer
+--------------
+Currency
+Exchange rate
+Discount
+Tariff
+Amount
+VAT
+Product
+Customer
+Quantity
+Invoice date
+State
+Lines (?)
+
+
+Every object should gain its right to exist. We need to decide how we pick the most important.
+
+1. Always from the business perspective. But what is that? Money. We must be precise, and
+not take the "cents" (Rounding).
+2. Customer perspective. Discount? There is another customer, that is also important:
+3. Client. But as a client of the API. As a developer we value a design that does not let us fail.
+4. Bug sensitive.
+5. Where there is a relation is a dependency.
+
+
+Prioritize the list
+------------------
+

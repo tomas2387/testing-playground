@@ -1,0 +1,11 @@
+changing setters to actions.
+
+Should we have state as a value object? yes?
+
+setIsCancelled(true) -> is actually changing the whole entity.
+All of the others behaviours are disabled!
+
+The need for changing from a setter to an action (setFinalize to finalize)
+is a command, is a new face to life. Also you cannot do setFinalize(true) and then
+setFinalize(false). Is not something we can undo.
+

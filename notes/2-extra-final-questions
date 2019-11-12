@@ -1,0 +1,4 @@
+- DateTimeImmutable is a piece of infrastructure, how we should treat it?
+DateTimeImmutable is a complex object as it can have two sides, one is pure as a value object and other
+is when we ask for 'now' time so we ask to the system. As long as on our tests we create a VO, we are fine.
+

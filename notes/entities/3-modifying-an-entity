@@ -1,0 +1,1 @@
+addline modifies the sales invoice. Its a command, and as a command it returns void.

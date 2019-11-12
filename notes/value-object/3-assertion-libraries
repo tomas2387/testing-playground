@@ -1,0 +1,4 @@
+We should throw exception when the input is wrong.
+An assertion library can abstract away checks about emails, latitude, and more.
+
+https://github.com/beberlei/assert

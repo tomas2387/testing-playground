@@ -1,0 +1,10 @@
+assertSame('USD', $money->currency()->toString());
+We are coupled to the internal properties of the value object
+
+// versus
+assertEquals(new Currency('USD'), $money->currency());
+This is better
+
+// or even better
+assertEquals(new Money(100, new Currency('USD')), $money);
+This is better than better. We are testing the object that holds a superior behaviour.

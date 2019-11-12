@@ -8,49 +8,31 @@ use InvalidArgumentException;
 
 final class Line
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $productId;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $description;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     private $quantity;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $quantityPrecision;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     private $tariff;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $currency;
 
-    /**
-     * @var float|null
-     */
+    /** @var float|null */
     private $discount;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $vatCode;
 
-    /**
-     * @var float|null
-     */
+    /** @var float|null */
     private $exchangeRate;
 
     public function __construct(
@@ -63,7 +45,8 @@ final class Line
         ?float $discount,
         string $vatCode,
         ?float $exchangeRate
-    ) {
+    )
+    {
         $this->productId = $productId;
         $this->description = $description;
         $this->quantity = $quantity;

@@ -1,0 +1,2 @@
+vatRate function seems wrong. It has to reach out for infrastructure pieces (Datetime) to get information and is not pure.
+
