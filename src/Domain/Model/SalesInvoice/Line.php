@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace Domain\Model\SalesInvoice;
 
-use DateTime;
-use InvalidArgumentException;
-
 final class Line
 {
     /** @var int */
@@ -79,18 +76,7 @@ final class Line
 
     public function vatAmount(): float
     {
-        if ($this->vatCode->asString() === 'S') {
-            $vatRate = 21.0;
-        } elseif ($this->vatCode->asString() === 'L') {
-            if (new DateTime('now') < DateTime::createFromFormat('Y-m-d', '2019-01-01')) {
-                $vatRate = 6.0;
-            } else {
-                $vatRate = 9.0;
-            }
-        } else {
-            throw new InvalidArgumentException('Should not happen');
-        }
-
+        $vatRate = $this->vatCode->rate();
         return round($this->netAmount() * $vatRate / 100, 2);
     }
 }
