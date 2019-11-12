@@ -29,7 +29,7 @@ final class Line
     /** @var float|null */
     private $discount;
 
-    /** @var string */
+    /** @var Vat */
     private $vatCode;
 
     /** @var float|null */
@@ -43,7 +43,7 @@ final class Line
         float $tariff,
         string $currency,
         ?float $discount,
-        string $vatCode,
+        Vat $vatCode,
         ?float $exchangeRate
     )
     {
@@ -79,9 +79,9 @@ final class Line
 
     public function vatAmount(): float
     {
-        if ($this->vatCode === 'S') {
+        if ($this->vatCode->asString() === 'S') {
             $vatRate = 21.0;
-        } elseif ($this->vatCode === 'L') {
+        } elseif ($this->vatCode->asString() === 'L') {
             if (new DateTime('now') < DateTime::createFromFormat('Y-m-d', '2019-01-01')) {
                 $vatRate = 6.0;
             } else {

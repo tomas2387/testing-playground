@@ -26,7 +26,7 @@ final class SalesInvoiceTest extends TestCase
             2.0,
             15.0,
             10.0,
-            'S'
+            Vat::fromVatCode('S')
         );
         $salesInvoice->addLine(
             2,
@@ -34,7 +34,7 @@ final class SalesInvoiceTest extends TestCase
             3.123456,
             12.50,
             null,
-            'L'
+            Vat::fromVatCode('L')
         );
 
         /*
@@ -78,7 +78,7 @@ final class SalesInvoiceTest extends TestCase
             2.0,
             15.0,
             10.0,
-            'S'
+            Vat::fromVatCode('S')
         );
         $salesInvoice->addLine(
             $this->anotherProductId(),
@@ -86,7 +86,7 @@ final class SalesInvoiceTest extends TestCase
             3.123456,
             12.50,
             null,
-            'L'
+            Vat::fromVatCode('L')
         );
 
         self::assertEquals($salesInvoice->totalNetAmount(), $salesInvoice->totalNetAmountInLedgerCurrency());
@@ -108,7 +108,7 @@ final class SalesInvoiceTest extends TestCase
             $this->aQuantity(),
             $this->aTariff(),
             null,
-            'Invalid VAT code'
+            Vat::fromVatCode('Invalid VAT code')
         );
     }
 
