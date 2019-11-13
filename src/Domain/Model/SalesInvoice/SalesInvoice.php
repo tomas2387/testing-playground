@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Domain\Model\SalesInvoice;
 
-use Assert\Assertion;
 use DateTimeImmutable;
 
 final class SalesInvoice
@@ -23,17 +22,15 @@ final class SalesInvoice
     /** @var Line[] */
     private $lines = [];
 
-    /** @var bool */
-    private $isFinalized = false;
-
-    /** @var bool */
-    private $isCancelled = false;
-
     /** @var DateTimeImmutable */
     private $invoiceDate;
 
+    /** @var State */
+    private $state;
+
     public function __construct()
     {
+        $this->state = State::draft();
     }
 
     public function setCustomerId(int $customerId): void
@@ -123,23 +120,23 @@ final class SalesInvoice
         return round($this->totalVatAmount() / $this->exchangeRate, 2);
     }
 
-    public function setFinalized(bool $finalized): void
+    public function finalize(): void
     {
-        $this->isFinalized = $finalized;
+        $this->state = State::finalized();
     }
 
     public function isFinalized(): bool
     {
-        return $this->isFinalized;
+        return $this->state->isFinalized();
     }
 
-    public function setCancelled(bool $cancelled): void
+    public function cancel(): void
     {
-        $this->isCancelled = $cancelled;
+        $this->state = State::cancelled();
     }
 
     public function isCancelled(): bool
     {
-        return $this->isCancelled;
+        return $this->state->isCancelled();
     }
 }

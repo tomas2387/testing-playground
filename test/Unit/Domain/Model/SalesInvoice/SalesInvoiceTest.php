@@ -120,7 +120,7 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice = $this->createSalesInvoice();
         self::assertFalse($salesInvoice->isFinalized());
 
-        $salesInvoice->setFinalized(true);
+        $salesInvoice->finalize();
 
         self::assertTrue($salesInvoice->isFinalized());
     }
@@ -133,7 +133,7 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice = $this->createSalesInvoice();
         self::assertFalse($salesInvoice->isCancelled());
 
-        $salesInvoice->setCancelled(true);
+        $salesInvoice->cancel();
 
         self::assertTrue($salesInvoice->isCancelled());
     }
