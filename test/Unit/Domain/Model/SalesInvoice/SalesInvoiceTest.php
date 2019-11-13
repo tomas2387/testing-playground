@@ -17,7 +17,7 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice = new SalesInvoice();
         $salesInvoice->setCustomerId(CustomerId::fromInt(1001));
         $salesInvoice->setInvoiceDate(new DateTimeImmutable());
-        $salesInvoice->setCurrency('USD');
+        $salesInvoice->setCurrency(Currency::fromStringCurrency('USD'));
         $salesInvoice->setExchangeRate(1.3);
         $salesInvoice->setQuantityPrecision(3);
 
@@ -167,7 +167,7 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice = new SalesInvoice();
         $salesInvoice->setCustomerId(CustomerId::fromInt(1001));
         $salesInvoice->setInvoiceDate(new DateTimeImmutable());
-        $salesInvoice->setCurrency('EUR');
+        $salesInvoice->setCurrency(Currency::fromStringCurrency('EUR'));
         $salesInvoice->setQuantityPrecision(3);
 
         return $salesInvoice;

@@ -11,7 +11,7 @@ final class SalesInvoice
     /** @var CustomerId */
     private $customerId;
 
-    /** @var string */
+    /** @var Currency */
     private $currency;
 
     /** @var float|null */
@@ -44,7 +44,7 @@ final class SalesInvoice
         $this->invoiceDate = $invoiceDate;
     }
 
-    public function setCurrency(string $currency): void
+    public function setCurrency(Currency $currency): void
     {
         $this->currency = $currency;
     }
@@ -94,7 +94,7 @@ final class SalesInvoice
 
     public function totalNetAmountInLedgerCurrency(): float
     {
-        if ($this->currency === 'EUR' || $this->exchangeRate == null) {
+        if ($this->currency->isEUR() || $this->exchangeRate == null) {
             return $this->totalNetAmount();
         }
 
@@ -114,7 +114,7 @@ final class SalesInvoice
 
     public function totalVatAmountInLedgerCurrency(): float
     {
-        if ($this->currency === 'EUR' || $this->exchangeRate == null) {
+        if ($this->currency->isEUR() || $this->exchangeRate == null) {
             return $this->totalVatAmount();
         }
 
