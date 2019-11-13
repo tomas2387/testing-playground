@@ -14,8 +14,8 @@ final class SalesInvoice
     /** @var Currency */
     private $currency;
 
-    /** @var float|null */
-    private $exchangeRate;
+    /** @var MoneyExchange */
+    private $moneyExchange;
 
     /** @var int */
     private $quantityPrecision;
@@ -32,6 +32,7 @@ final class SalesInvoice
     public function __construct()
     {
         $this->state = State::draft();
+        $this->moneyExchange = MoneyExchange::noChange();
     }
 
     public function setCustomerId(CustomerId $customerId): void
@@ -49,9 +50,9 @@ final class SalesInvoice
         $this->currency = $currency;
     }
 
-    public function setExchangeRate(?float $exchangeRate): void
+    public function setMoneyExchange(MoneyExchange $moneyExchange): void
     {
-        $this->exchangeRate = $exchangeRate;
+        $this->moneyExchange = $moneyExchange;
     }
 
     public function setQuantityPrecision(int $quantityPrecision): void
@@ -77,7 +78,7 @@ final class SalesInvoice
             $this->currency,
             $discount,
             $vatCode,
-            $this->exchangeRate
+            $this->moneyExchange
         );
     }
 
@@ -94,11 +95,11 @@ final class SalesInvoice
 
     public function totalNetAmountInLedgerCurrency(): float
     {
-        if ($this->currency->isEUR() || $this->exchangeRate == null) {
+        if ($this->currency->is($this->moneyExchange->currencyToExchange())) {
             return $this->totalNetAmount();
         }
 
-        return round($this->totalNetAmount() / $this->exchangeRate, 2);
+        return round($this->totalNetAmount() / $this->moneyExchange->toFloat(), 2);
     }
 
     public function totalVatAmount(): float
@@ -114,11 +115,11 @@ final class SalesInvoice
 
     public function totalVatAmountInLedgerCurrency(): float
     {
-        if ($this->currency->isEUR() || $this->exchangeRate == null) {
+        if ($this->currency->is($this->moneyExchange->currencyToExchange())) {
             return $this->totalVatAmount();
         }
 
-        return round($this->totalVatAmount() / $this->exchangeRate, 2);
+        return round($this->totalVatAmount() / $this->moneyExchange->toFloat(), 2);
     }
 
     public function finalize(): void

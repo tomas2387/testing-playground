@@ -24,8 +24,23 @@ final class Currency
         return new self($currency);
     }
 
+    public static function USD()
+    {
+        return self::fromStringCurrency(self::USD);
+    }
+
+    public static function EUR()
+    {
+        return self::fromStringCurrency(self::EUR);
+    }
+
     public function isEUR(): bool
     {
         return $this->currency === self::EUR;
+    }
+
+    public function is(Currency $otherCurrency): bool
+    {
+        return $this->currency === $otherCurrency->currency;
     }
 }
