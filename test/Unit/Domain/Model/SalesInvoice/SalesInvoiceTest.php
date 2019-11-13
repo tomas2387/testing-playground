@@ -5,6 +5,7 @@ namespace Domain\Model\SalesInvoice;
 use DateTimeImmutable;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 final class SalesInvoiceTest extends TestCase
 {
@@ -136,6 +137,26 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice->cancel();
 
         self::assertTrue($salesInvoice->isCancelled());
+    }
+
+    public function test_you_cant_cancel_a_finalized_invoice()
+    {
+        $salesInvoice = $this->createSalesInvoice();
+        $salesInvoice->finalize();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessageRegExp('/already finalized/');
+        $salesInvoice->cancel();
+    }
+
+    public function test_you_cant_finalize_a_cancelled_invoice()
+    {
+        $salesInvoice = $this->createSalesInvoice();
+        $salesInvoice->cancel();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessageRegExp('/already cancelled/');
+        $salesInvoice->finalize();
     }
 
     /**

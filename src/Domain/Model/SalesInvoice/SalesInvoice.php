@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Domain\Model\SalesInvoice;
 
 use DateTimeImmutable;
+use RuntimeException;
 
 final class SalesInvoice
 {
@@ -122,6 +123,9 @@ final class SalesInvoice
 
     public function finalize(): void
     {
+        if ($this->state->isCancelled()) {
+            throw new RuntimeException('can\'t finalize. Invoice is already cancelled');
+        }
         $this->state = State::finalized();
     }
 
@@ -132,6 +136,9 @@ final class SalesInvoice
 
     public function cancel(): void
     {
+        if ($this->state->isFinalized()) {
+            throw new RuntimeException('can\'t cancel. Invoice is already finalized');
+        }
         $this->state = State::cancelled();
     }
 
