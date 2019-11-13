@@ -8,7 +8,7 @@ use RuntimeException;
 
 final class SalesInvoice
 {
-    /** @var int */
+    /** @var CustomerId */
     private $customerId;
 
     /** @var string */
@@ -34,7 +34,7 @@ final class SalesInvoice
         $this->state = State::draft();
     }
 
-    public function setCustomerId(int $customerId): void
+    public function setCustomerId(CustomerId $customerId): void
     {
         $this->customerId = $customerId;
     }
@@ -129,17 +129,17 @@ final class SalesInvoice
         $this->state = State::finalized();
     }
 
-    public function isFinalized(): bool
-    {
-        return $this->state->isFinalized();
-    }
-
     public function cancel(): void
     {
         if ($this->state->isFinalized()) {
             throw new RuntimeException('can\'t cancel. Invoice is already finalized');
         }
         $this->state = State::cancelled();
+    }
+
+    public function isFinalized(): bool
+    {
+        return $this->state->isFinalized();
     }
 
     public function isCancelled(): bool
