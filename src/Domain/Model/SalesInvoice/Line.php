@@ -14,7 +14,7 @@ final class Line
     /** @var Quantity */
     private $quantity;
 
-    /** @var float */
+    /** @var Tariff */
     private $tariff;
 
     /** @var Currency */
@@ -33,7 +33,7 @@ final class Line
         int $productId,
         string $description,
         Quantity $quantity,
-        float $tariff,
+        Tariff $tariff,
         Currency $currency,
         ?float $discount,
         Vat $vatCode,
@@ -52,7 +52,7 @@ final class Line
 
     public function amount(): float
     {
-        return round($this->quantity->multiply($this->tariff), 2);
+        return round($this->quantity->times($this->tariff), 2);
     }
 
     public function discountAmount(): float

@@ -56,7 +56,7 @@ final class SalesInvoice
         int $productId,
         string $description,
         Quantity $quantity,
-        float $tariff,
+        Tariff $tariff,
         ?float $discount,
         Vat $vatCode
     ): void

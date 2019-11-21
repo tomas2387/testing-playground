@@ -25,7 +25,7 @@ final class SalesInvoiceTest extends TestCase
             1,
             'Product with a 10% discount and standard VAT applied',
             Quantity::fromQuantityAndPrecision(2.0, 3),
-            15.0,
+            Tariff::fromTariff(15.0),
             10.0,
             Vat::fromVatCode('S')
         );
@@ -33,7 +33,7 @@ final class SalesInvoiceTest extends TestCase
             2,
             'Product with no discount and low VAT applied',
             Quantity::fromQuantityAndPrecision(3.123456, 3),
-            12.50,
+            Tariff::fromTariff(12.50),
             null,
             Vat::fromVatCode('L')
         );
@@ -77,7 +77,7 @@ final class SalesInvoiceTest extends TestCase
             $this->aProductId(),
             'Product with a 10% discount and standard VAT applied',
             Quantity::fromQuantityAndPrecision(2.0, 3),
-            15.0,
+            Tariff::fromTariff(15.0),
             10.0,
             Vat::fromVatCode('S')
         );
@@ -85,7 +85,7 @@ final class SalesInvoiceTest extends TestCase
             $this->anotherProductId(),
             'Product with no discount and low VAT applied',
             Quantity::fromQuantityAndPrecision(3.123456, 3),
-            12.50,
+            Tariff::fromTariff(12.50),
             null,
             Vat::fromVatCode('L')
         );
@@ -183,9 +183,9 @@ final class SalesInvoiceTest extends TestCase
         return Quantity::fromQuantityAndPrecision(2.0, 3);
     }
 
-    private function aTariff(): float
+    private function aTariff(): Tariff
     {
-        return 15.0;
+        return Tariff::fromTariff(15.0);
     }
 
     private function aProductId(): int

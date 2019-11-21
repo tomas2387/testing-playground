@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Domain\Model\SalesInvoice;
 
+use function round;
+
 final class Quantity
 {
     /** @var float */
@@ -23,6 +25,16 @@ final class Quantity
 
     public function multiply(float $tariff): float
     {
-        return \round($this->quantity, $this->quantityPrecision) * $tariff;
+        return $this->toFloat() * $tariff;
+    }
+
+    public function toFloat(): float
+    {
+        return round($this->quantity, $this->quantityPrecision);
+    }
+
+    public function times(Tariff $tariff): float
+    {
+        return $this->multiply($tariff->toFloat());
     }
 }
