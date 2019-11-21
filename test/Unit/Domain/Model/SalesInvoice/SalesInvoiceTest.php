@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Domain\Model\SalesInvoice;
 
 use DateTimeImmutable;
-use Exception;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -159,10 +159,6 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice->finalize();
     }
 
-    /**
-     * @return SalesInvoice
-     * @throws Exception
-     */
     private function createSalesInvoice(): SalesInvoice
     {
         $salesInvoice = new SalesInvoice();
