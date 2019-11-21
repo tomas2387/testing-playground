@@ -3,6 +3,7 @@
 namespace Domain\Model\SalesInvoice;
 
 use DateTimeImmutable;
+use Exception;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -19,12 +20,11 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice->setInvoiceDate(new DateTimeImmutable());
         $salesInvoice->setCurrency(Currency::fromStringCurrency('USD'));
         $salesInvoice->setMoneyExchange(MoneyExchange::fromUSDtoEUR(1.3));
-        $salesInvoice->setQuantityPrecision(3);
 
         $salesInvoice->addLine(
             1,
             'Product with a 10% discount and standard VAT applied',
-            2.0,
+            Quantity::fromQuantityAndPrecision(2.0, 3),
             15.0,
             10.0,
             Vat::fromVatCode('S')
@@ -32,7 +32,7 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice->addLine(
             2,
             'Product with no discount and low VAT applied',
-            3.123456,
+            Quantity::fromQuantityAndPrecision(3.123456, 3),
             12.50,
             null,
             Vat::fromVatCode('L')
@@ -76,7 +76,7 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice->addLine(
             $this->aProductId(),
             'Product with a 10% discount and standard VAT applied',
-            2.0,
+            Quantity::fromQuantityAndPrecision(2.0, 3),
             15.0,
             10.0,
             Vat::fromVatCode('S')
@@ -84,7 +84,7 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice->addLine(
             $this->anotherProductId(),
             'Product with no discount and low VAT applied',
-            3.123456,
+            Quantity::fromQuantityAndPrecision(3.123456, 3),
             12.50,
             null,
             Vat::fromVatCode('L')
@@ -161,6 +161,7 @@ final class SalesInvoiceTest extends TestCase
 
     /**
      * @return SalesInvoice
+     * @throws Exception
      */
     private function createSalesInvoice(): SalesInvoice
     {
@@ -168,7 +169,6 @@ final class SalesInvoiceTest extends TestCase
         $salesInvoice->setCustomerId(CustomerId::fromInt(1001));
         $salesInvoice->setInvoiceDate(new DateTimeImmutable());
         $salesInvoice->setCurrency(Currency::fromStringCurrency('EUR'));
-        $salesInvoice->setQuantityPrecision(3);
 
         return $salesInvoice;
     }
@@ -178,9 +178,9 @@ final class SalesInvoiceTest extends TestCase
         return 'Description';
     }
 
-    private function aQuantity(): float
+    private function aQuantity(): Quantity
     {
-        return 2.0;
+        return Quantity::fromQuantityAndPrecision(2.0, 3);
     }
 
     private function aTariff(): float

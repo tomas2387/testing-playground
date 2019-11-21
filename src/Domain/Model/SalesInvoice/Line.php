@@ -11,11 +11,8 @@ final class Line
     /** @var string */
     private $description;
 
-    /** @var float */
+    /** @var Quantity */
     private $quantity;
-
-    /** @var int */
-    private $quantityPrecision;
 
     /** @var float */
     private $tariff;
@@ -35,8 +32,7 @@ final class Line
     public function __construct(
         int $productId,
         string $description,
-        float $quantity,
-        int $quantityPrecision,
+        Quantity $quantity,
         float $tariff,
         Currency $currency,
         ?float $discount,
@@ -47,7 +43,6 @@ final class Line
         $this->productId = $productId;
         $this->description = $description;
         $this->quantity = $quantity;
-        $this->quantityPrecision = $quantityPrecision;
         $this->tariff = $tariff;
         $this->currency = $currency;
         $this->discount = $discount;
@@ -57,7 +52,7 @@ final class Line
 
     public function amount(): float
     {
-        return round(round($this->quantity, $this->quantityPrecision) * $this->tariff, 2);
+        return round($this->quantity->multiply($this->tariff), 2);
     }
 
     public function discountAmount(): float

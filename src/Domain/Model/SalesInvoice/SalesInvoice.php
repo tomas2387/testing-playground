@@ -17,9 +17,6 @@ final class SalesInvoice
     /** @var MoneyExchange */
     private $moneyExchange;
 
-    /** @var int */
-    private $quantityPrecision;
-
     /** @var Line[] */
     private $lines = [];
 
@@ -55,15 +52,10 @@ final class SalesInvoice
         $this->moneyExchange = $moneyExchange;
     }
 
-    public function setQuantityPrecision(int $quantityPrecision): void
-    {
-        $this->quantityPrecision = $quantityPrecision;
-    }
-
     public function addLine(
         int $productId,
         string $description,
-        float $quantity,
+        Quantity $quantity,
         float $tariff,
         ?float $discount,
         Vat $vatCode
@@ -73,7 +65,6 @@ final class SalesInvoice
             $productId,
             $description,
             $quantity,
-            $this->quantityPrecision,
             $tariff,
             $this->currency,
             $discount,
