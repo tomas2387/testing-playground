@@ -19,14 +19,14 @@ final class MoneyExchange
         $this->exchangeRate = $exchangeRate;
     }
 
-    public static function fromUSDtoEUR(float $exchangeRate): self
+    public static function fromUSDtoEUR(): self
     {
-        return new self($exchangeRate, Currency::USD(), Currency::EUR());
+        return new self(1.3, Currency::USD(), Currency::EUR());
     }
 
-    public static function fromEURtoUSD(float $exchangeRate): self
+    public static function fromEURtoUSD(): self
     {
-        return new self($exchangeRate, Currency::USD(), Currency::EUR());
+        return new self(0.7, Currency::USD(), Currency::EUR());
     }
 
     public static function noChange()

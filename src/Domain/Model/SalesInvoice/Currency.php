@@ -39,8 +39,23 @@ final class Currency
         return $this->currency === self::EUR;
     }
 
+    public function isUSD(): bool
+    {
+        return $this->currency === self::USD;
+    }
+
     public function is(Currency $otherCurrency): bool
     {
         return $this->currency === $otherCurrency->currency;
+    }
+
+    public function moneyExchangeTo(Currency $otherCurrency)
+    {
+        if ($this->isUSD() && $otherCurrency->isEUR()) {
+            return MoneyExchange::fromUSDtoEUR();
+        } elseif ($this->isEUR() && $otherCurrency->isUSD()) {
+            return MoneyExchange::fromEURtoUSD();
+        }
+        return MoneyExchange::noChange();
     }
 }

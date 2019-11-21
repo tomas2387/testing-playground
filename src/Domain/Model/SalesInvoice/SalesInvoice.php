@@ -14,9 +14,6 @@ final class SalesInvoice
     /** @var Currency */
     private $currency;
 
-    /** @var MoneyExchange */
-    private $moneyExchange;
-
     /** @var Line[] */
     private $lines = [];
 
@@ -26,30 +23,12 @@ final class SalesInvoice
     /** @var State */
     private $state;
 
-    public function __construct()
+    public function __construct(CustomerId $customerId, DateTimeImmutable $invoiceDate, Currency $currency)
     {
         $this->state = State::draft();
-        $this->moneyExchange = MoneyExchange::noChange();
-    }
-
-    public function setCustomerId(CustomerId $customerId): void
-    {
         $this->customerId = $customerId;
-    }
-
-    public function setInvoiceDate(DateTimeImmutable $invoiceDate): void
-    {
         $this->invoiceDate = $invoiceDate;
-    }
-
-    public function setCurrency(Currency $currency): void
-    {
         $this->currency = $currency;
-    }
-
-    public function setMoneyExchange(MoneyExchange $moneyExchange): void
-    {
-        $this->moneyExchange = $moneyExchange;
     }
 
     public function addLine(
@@ -68,8 +47,7 @@ final class SalesInvoice
             $tariff,
             $this->currency,
             $discount,
-            $vatCode,
-            $this->moneyExchange
+            $vatCode
         );
     }
 
@@ -86,11 +64,8 @@ final class SalesInvoice
 
     public function totalNetAmountInLedgerCurrency(): float
     {
-        if ($this->currency->is($this->moneyExchange->currencyToExchange())) {
-            return $this->totalNetAmount();
-        }
-
-        return round($this->totalNetAmount() / $this->moneyExchange->toFloat(), 2);
+        $moneyExchange = $this->currency->moneyExchangeTo(Currency::EUR());
+        return round($this->totalNetAmount() / $moneyExchange->toFloat(), 2);
     }
 
     public function totalVatAmount(): float
@@ -106,11 +81,8 @@ final class SalesInvoice
 
     public function totalVatAmountInLedgerCurrency(): float
     {
-        if ($this->currency->is($this->moneyExchange->currencyToExchange())) {
-            return $this->totalVatAmount();
-        }
-
-        return round($this->totalVatAmount() / $this->moneyExchange->toFloat(), 2);
+        $moneyExchange = $this->currency->moneyExchangeTo(Currency::EUR());
+        return round($this->totalVatAmount() / $moneyExchange->toFloat(), 2);
     }
 
     public function finalize(): void

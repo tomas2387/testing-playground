@@ -26,9 +26,6 @@ final class Line
     /** @var Vat */
     private $vatCode;
 
-    /** @var MoneyExchange */
-    private $moneyExchange;
-
     public function __construct(
         int $productId,
         string $description,
@@ -36,8 +33,7 @@ final class Line
         Tariff $tariff,
         Currency $currency,
         ?float $discount,
-        Vat $vatCode,
-        MoneyExchange $moneyExchange
+        Vat $vatCode
     )
     {
         $this->productId = $productId;
@@ -47,7 +43,6 @@ final class Line
         $this->currency = $currency;
         $this->discount = $discount;
         $this->vatCode = $vatCode;
-        $this->moneyExchange = $moneyExchange;
     }
 
     public function amount(): float
