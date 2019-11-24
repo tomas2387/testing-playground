@@ -5,12 +5,6 @@ namespace Domain\Model\SalesInvoice;
 
 final class Line
 {
-    /** @var int */
-    private $productId;
-
-    /** @var string */
-    private $description;
-
     /** @var Quantity */
     private $quantity;
 
@@ -20,24 +14,25 @@ final class Line
     /** @var Currency */
     private $currency;
 
-    /** @var float|null */
+    /** @var Discount */
     private $discount;
 
     /** @var Vat */
     private $vatCode;
 
+    /** @var Product */
+    private $product;
+
     public function __construct(
-        int $productId,
-        string $description,
+        Product $product,
         Quantity $quantity,
         Tariff $tariff,
         Currency $currency,
-        ?float $discount,
+        Discount $discount,
         Vat $vatCode
     )
     {
-        $this->productId = $productId;
-        $this->description = $description;
+        $this->product = $product;
         $this->quantity = $quantity;
         $this->tariff = $tariff;
         $this->currency = $currency;
@@ -52,11 +47,11 @@ final class Line
 
     public function discountAmount(): float
     {
-        if ($this->discount === null) {
+        if ($this->discount->toFloat() === null) {
             return 0.0;
         }
 
-        return round($this->amount() * $this->discount / 100, 2);
+        return round($this->amount() * $this->discount->toFloat() / 100, 2);
     }
 
     public function netAmount(): float

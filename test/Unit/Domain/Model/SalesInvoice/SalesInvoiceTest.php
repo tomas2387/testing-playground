@@ -22,19 +22,19 @@ final class SalesInvoiceTest extends TestCase
         );
 
         $salesInvoice->addLine(
-            1,
-            'Product with a 10% discount and standard VAT applied',
+            Product::fromIdAndDescription(1,
+                'Product with a 10% discount and standard VAT applied'),
             Quantity::fromQuantityAndPrecision(2.0, 3),
             Tariff::fromTariff(15.0),
-            10.0,
+            Discount::fromFloat(10.0),
             Vat::fromVatCode('S')
         );
         $salesInvoice->addLine(
-            2,
-            'Product with no discount and low VAT applied',
+            Product::fromIdAndDescription(2,
+                'Product with no discount and low VAT applied'),
             Quantity::fromQuantityAndPrecision(3.123456, 3),
             Tariff::fromTariff(12.50),
-            null,
+            Discount::noDiscount(),
             Vat::fromVatCode('L')
         );
 
@@ -74,19 +74,19 @@ final class SalesInvoiceTest extends TestCase
     {
         $salesInvoice = $this->createSalesInvoice();
         $salesInvoice->addLine(
-            $this->aProductId(),
-            'Product with a 10% discount and standard VAT applied',
+            Product::fromIdAndDescription($this->aProductId(),
+                'Product with a 10% discount and standard VAT applied'),
             Quantity::fromQuantityAndPrecision(2.0, 3),
             Tariff::fromTariff(15.0),
-            10.0,
+            Discount::fromFloat(10.0),
             Vat::fromVatCode('S')
         );
         $salesInvoice->addLine(
-            $this->anotherProductId(),
-            'Product with no discount and low VAT applied',
+            Product::fromIdAndDescription($this->anotherProductId(),
+                'Product with no discount and low VAT applied'),
             Quantity::fromQuantityAndPrecision(3.123456, 3),
             Tariff::fromTariff(12.50),
-            null,
+            Discount::noDiscount(),
             Vat::fromVatCode('L')
         );
 
@@ -104,11 +104,11 @@ final class SalesInvoiceTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         $salesInvoice->addLine(
-            $this->aProductId(),
-            $this->aDescription(),
+            Product::fromIdAndDescription($this->aProductId(),
+                $this->aDescription()),
             $this->aQuantity(),
             $this->aTariff(),
-            null,
+            Discount::noDiscount(),
             Vat::fromVatCode('Invalid VAT code')
         );
     }
