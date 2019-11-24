@@ -33,8 +33,8 @@ final class Quantity
         return round($this->quantity, $this->quantityPrecision);
     }
 
-    public function times(Tariff $tariff): float
+    public function times(Tariff $tariff): Amount
     {
-        return $this->multiply($tariff->toFloat());
+        return Amount::fromFloat($this->multiply($tariff->toFloat()));
     }
 }

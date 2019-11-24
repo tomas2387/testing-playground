@@ -30,6 +30,16 @@ final class Vat
         return new self($code);
     }
 
+    public static function standard(): self
+    {
+        return new self(self::STANDARD_CODE);
+    }
+
+    public static function lower(): self
+    {
+        return new self(self::LOWER_CODE);
+    }
+
     public function asString(): string
     {
         return $this->code;

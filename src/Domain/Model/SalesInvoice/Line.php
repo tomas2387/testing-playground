@@ -40,28 +40,19 @@ final class Line
         $this->vatCode = $vatCode;
     }
 
-    public function amount(): float
+    public function amount(): Amount
     {
-        return round($this->quantity->times($this->tariff), 2);
+        return $this->quantity->times($this->tariff);
     }
 
-    public function discountAmount(): float
+    public function netAmount(): Amount
     {
-        if ($this->discount->toFloat() === null) {
-            return 0.0;
-        }
-
-        return round($this->amount() * $this->discount->toFloat() / 100, 2);
-    }
-
-    public function netAmount(): float
-    {
-        return round($this->amount() - $this->discountAmount(), 2);
+        return $this->amount()->applyDiscount($this->discount);
     }
 
     public function vatAmount(): float
     {
         $vatRate = $this->vatCode->rate();
-        return round($this->netAmount() * $vatRate / 100, 2);
+        return $this->netAmount()->multiply($vatRate / 100)->toFloat();
     }
 }
